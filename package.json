@@ -1,5 +1,5 @@
 {
-  "homepage": "https://Vishesh-Pandey.github.io/v-share",
+  "homepage": ".",
   "name": "v-share",
   "private": true,
   "version": "0.0.0",
@@ -13,10 +13,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "firebase": "^10.7.1",
     "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^9.0.4"
+    "react-redux": "^9.0.4",
+    "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
