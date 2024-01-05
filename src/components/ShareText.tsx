@@ -3,8 +3,13 @@ import { useState } from "react";
 import { db } from "../firebase";
 
 function ShareText() {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState<string>("");
+  const [alert, setAlert] = useState<boolean>(false);
   const generateUrl = async () => {
+    if (text.length === 0) {
+      setAlert(true);
+      return;
+    }
     const generatedId =
       new Date().getTime().toString() + Math.random().toString();
     await setDoc(doc(db, "sharedText", generatedId), {
@@ -15,6 +20,7 @@ function ShareText() {
       "https://vishesh-pandey.github.io/v-share/#/published/" + generatedId
     );
     setText("");
+    setAlert(false);
   };
 
   const [text, setText] = useState<string>("");
@@ -36,13 +42,12 @@ function ShareText() {
         <button
           onClick={generateUrl}
           className="bg-gray-300 p-4 m-4 rounded-md hover:bg-black duration-500 hover:text-white"
-          disabled={text.length === 0}
         >
           Publish
         </button>
       </div>
       <div className="warning">
-        <span className="text-red-400" hidden={text.length !== 0}>
+        <span className="text-red-400" hidden={!alert || text.length !== 0}>
           text can not be empty
         </span>
       </div>
