@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 function PublishedText() {
   const { id } = useParams();
-  const [text, setText] = useState("");
+  const [text, setText] = useState("Loading...");
 
   useEffect(() => {
     const loadSharedText = async () => {
@@ -16,7 +16,7 @@ function PublishedText() {
         setText(docSnap.data().text);
       } else {
         // docSnap.data() will be undefined in this case
-        console.log("No such document!");
+        console.log("Try making changes here!");
       }
     };
 
