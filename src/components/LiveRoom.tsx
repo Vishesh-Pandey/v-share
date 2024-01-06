@@ -44,23 +44,27 @@ function LiveRoom() {
 
   return (
     <>
-      <div className="text-center">
-        <textarea
-          className="w-11/12 border-black border-2 p-2 rounded-md"
-          value={text}
-          onChange={(e) => {
-            setText(e.target.value);
-            updateFirebaseDatabase(e.target.value);
-          }}
-          name=""
-          id=""
-          cols={30}
-          rows={10}
-          placeholder="start typing here... or paste your text using ctrl + v"
-        ></textarea>
-      </div>
+      <>
+        <div className="bg-gray-200 w-11/12 m-auto my-2 rounded-md p-2">
+          <div className="textarea  text-center">
+            <textarea
+              className="w-full border-black border-0 p-2 rounded-md outline-none resize-none"
+              value={text}
+              onChange={(e) => {
+                setText(e.target.value);
+                updateFirebaseDatabase(e.target.value);
+              }}
+              name=""
+              id=""
+              cols={30}
+              rows={20}
+              placeholder="start typing here... or paste your text using ctrl + v"
+            ></textarea>
+          </div>
+        </div>
+      </>
       <div className="details w-11/12 m-auto my-2">
-        <p className="text-yellow-300 bg-black p-2 rounded-lg font-bold">
+        <p className="text-white bg-gray-400 p-2 rounded-lg font-bold">
           Text here will get updated in realtime due to other collaborators
         </p>
         <p className="text-red-200">
