@@ -3,10 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 function Navbar() {
   const location = useLocation();
 
-  const currentpath = location.pathname;
-
-  console.log(currentpath);
-
   return (
     <>
       <div className="border-b-2">
@@ -43,7 +39,7 @@ function Navbar() {
               Live Room
             </Link>
           </li>
-          <li className="md:py-1 my-1 mx-1">
+          <li className="md:py-1 my-1">
             <Link
               className={`p-4 mx-1 rounded-md duration-500 block ${
                 location.pathname === "/about"
