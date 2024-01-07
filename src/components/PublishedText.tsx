@@ -16,11 +16,12 @@ function PublishedText() {
       const docRef = doc(db, "sharedText", id ? id : "notfound");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
         setText(docSnap.data().text);
       } else {
         // docSnap.data() will be undefined in this case
-        console.log("Try making changes here!");
+        setText(
+          "v-share WARNING: This is invalid page or it doesn't exist anymore."
+        );
       }
     };
 

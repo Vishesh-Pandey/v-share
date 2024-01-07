@@ -21,7 +21,6 @@ function LiveRoom() {
 
     const onDataChange = (snapshot: { val(): TextData }) => {
       const data = snapshot.val();
-      console.log(data);
       if (data !== null) {
         setText(data.text);
       } else {
@@ -37,7 +36,6 @@ function LiveRoom() {
 
     // Clean up the event listener on component unmount
     return () => {
-      console.log("exiting");
       unsubscribe();
     };
   }, []);
