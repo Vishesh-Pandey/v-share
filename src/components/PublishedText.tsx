@@ -35,7 +35,7 @@ function PublishedText() {
 
   const copyLink = () => {
     navigator.clipboard.writeText(
-      "https://vishesh-pandey.github.io/v-share/#" + location.pathname
+      "https://share.visheshpandey.com/#" + location.pathname
     );
     setLinkCopied(true);
   };
