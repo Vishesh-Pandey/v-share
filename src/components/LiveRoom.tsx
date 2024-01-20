@@ -54,7 +54,7 @@ function LiveRoom() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [id]);
 
   return (
     <>
