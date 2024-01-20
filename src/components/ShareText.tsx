@@ -8,6 +8,7 @@ function ShareText() {
   const [url, setUrl] = useState<string>("");
   const [alert, setAlert] = useState<string>("");
   const [publishing, setPublishing] = useState<boolean>(false);
+  const [canCopy, setCanCopy] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -24,6 +25,7 @@ function ShareText() {
       new Date().getTime().toString() + Math.random().toString();
     await setDoc(doc(db, "sharedText", generatedId), {
       text: text,
+      canCopy: canCopy,
       id: generatedId,
     });
     setUrl(
@@ -63,6 +65,17 @@ function ShareText() {
             rows={20}
             placeholder="start typing here... or paste your text using ctrl + v"
           ></textarea>
+        </div>
+        <div className="settings">
+          <input
+            type="checkbox"
+            name=""
+            id="allow-copy"
+            checked={canCopy}
+            onChange={() => setCanCopy(!canCopy)}
+            className="mx-2"
+          />
+          <label htmlFor="allow-copy">Allow Viewers to Copy Text? </label>
         </div>
         <div className="warning"></div>
         <div className="url">

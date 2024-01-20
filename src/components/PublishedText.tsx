@@ -8,6 +8,7 @@ function PublishedText() {
   const [text, setText] = useState<string>("Loading...");
   const [textCopied, setTextCopied] = useState<boolean>(false);
   const [linkCopied, setLinkCopied] = useState<boolean>(false);
+  const [canCopy, setCanCopy] = useState<boolean>(true);
 
   const location = useLocation();
 
@@ -17,6 +18,7 @@ function PublishedText() {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setText(docSnap.data().text);
+        setCanCopy(docSnap.data().canCopy);
       } else {
         // docSnap.data() will be undefined in this case
         setText(
@@ -29,6 +31,10 @@ function PublishedText() {
   }, [id]);
 
   const copyText = () => {
+    if (canCopy == false) {
+      alert("Publisher didn't allowed to Copy given text.");
+      return false;
+    }
     navigator.clipboard.writeText(text);
     setTextCopied(true);
   };
@@ -57,7 +63,13 @@ function PublishedText() {
             {linkCopied ? "Link Copied" : "Copy Link"}
           </button>
         </div>
-        <pre className="w-full p-5 bg-yellow-200 overflow-auto h-auto whitespace-break-spaces">
+
+        <pre
+          onCopy={copyText}
+          onCut={copyText}
+          className="w-full p-5 bg-yellow-100 overflow-auto h-auto whitespace-break-spaces "
+          style={!canCopy ? { userSelect: "none" } : {}}
+        >
           {text}
         </pre>
       </div>
