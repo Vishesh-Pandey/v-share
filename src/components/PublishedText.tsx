@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useLocation, useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
@@ -9,22 +9,31 @@ function PublishedText() {
   const [textCopied, setTextCopied] = useState<boolean>(false);
   const [linkCopied, setLinkCopied] = useState<boolean>(false);
   const [canCopy, setCanCopy] = useState<boolean>(true);
+  const [views, setViews] = useState(0);
 
   const location = useLocation();
 
   useEffect(() => {
+    let currentViews = 0;
     const loadSharedText = async () => {
       const docRef = doc(db, "sharedText", id ? id : "notfound");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setText(docSnap.data().text);
         setCanCopy(docSnap.data().canCopy);
+        setViews(docSnap.data().views);
+        currentViews = docSnap.data().views;
       } else {
         // docSnap.data() will be undefined in this case
         setText(
           "v-share WARNING: This is invalid page or it doesn't exist anymore."
         );
       }
+
+      await updateDoc(doc(db, "sharedText", id ? id : "notfound"), {
+        views: currentViews + 1,
+      });
+      setViews(currentViews);
     };
 
     loadSharedText();
@@ -52,16 +61,17 @@ function PublishedText() {
         <div className="controls p-5">
           <button
             onClick={copyText}
-            className="bg-gray-300 p-3 rounded-md hover:bg-yellow-100"
+            className="bg-gray-300 p-3 rounded-md hover:bg-yellow-100 duration-300"
           >
             {textCopied ? "Text Copied" : "Copy Text"}
           </button>
           <button
             onClick={copyLink}
-            className="bg-gray-300 p-3 rounded-md mx-3 hover:bg-yellow-100"
+            className="bg-gray-300 p-3 rounded-md mx-3 hover:bg-yellow-100 duration-300"
           >
             {linkCopied ? "Link Copied" : "Copy Link"}
           </button>
+          <span className="p-3 rounded-md mx-3">{views} Views</span>
         </div>
 
         <pre

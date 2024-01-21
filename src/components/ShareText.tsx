@@ -27,6 +27,7 @@ function ShareText() {
       text: text,
       canCopy: canCopy,
       id: generatedId,
+      views: 1,
     });
     setUrl(
       "https://vishesh-pandey.github.io/v-share/#/published/" + generatedId
