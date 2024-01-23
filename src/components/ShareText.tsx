@@ -9,6 +9,7 @@ function ShareText() {
   const [alert, setAlert] = useState<string>("");
   const [publishing, setPublishing] = useState<boolean>(false);
   const [canCopy, setCanCopy] = useState<boolean>(true);
+  const [viewOnce, setViewOnce] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function ShareText() {
       canCopy: canCopy,
       id: generatedId,
       views: 1,
+      viewOnce: viewOnce,
     });
     setUrl(
       "https://vishesh-pandey.github.io/v-share/#/published/" + generatedId
@@ -77,6 +79,15 @@ function ShareText() {
             className="mx-2"
           />
           <label htmlFor="allow-copy">Allow Viewers to Copy Text? </label>
+          <input
+            type="checkbox"
+            name=""
+            id="view-once"
+            checked={viewOnce}
+            onChange={() => setViewOnce(!viewOnce)}
+            className="mx-2"
+          />
+          <label htmlFor="view-once">View Once? </label>
         </div>
         <div className="warning"></div>
         <div className="url">
