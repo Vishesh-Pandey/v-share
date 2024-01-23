@@ -16,6 +16,7 @@ function PublishedText() {
   useEffect(() => {
     let currentViews = 0;
     const loadSharedText = async () => {
+      let viewOnce = false;
       const docRef = doc(db, "sharedText", id ? id : "notfound");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
@@ -23,6 +24,7 @@ function PublishedText() {
         setCanCopy(docSnap.data().canCopy);
         setViews(docSnap.data().views);
         currentViews = docSnap.data().views;
+        viewOnce = docSnap.data().viewOnce;
       } else {
         // docSnap.data() will be undefined in this case
         setText(
@@ -30,9 +32,17 @@ function PublishedText() {
         );
       }
 
+      if (viewOnce && currentViews >= 2) {
+        await updateDoc(doc(db, "sharedText", id ? id : "notfound"), {
+          views: currentViews + 1,
+          text: "v-share : This was a view once document and hence information has been removed. Request publisher again to get the information.",
+        });
+      }
+
       await updateDoc(doc(db, "sharedText", id ? id : "notfound"), {
         views: currentViews + 1,
       });
+
       setViews(currentViews);
     };
 
