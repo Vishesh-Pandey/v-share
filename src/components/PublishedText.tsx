@@ -20,6 +20,7 @@ function PublishedText() {
       const docRef = doc(db, "sharedText", id ? id : "notfound");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
+        document.getElementById("main-content").innerHTML = docSnap.data().text;
         setText(docSnap.data().text);
         setCanCopy(docSnap.data().canCopy);
         setViews(docSnap.data().views);
@@ -84,14 +85,15 @@ function PublishedText() {
           <span className="p-3 rounded-md mx-3">{views} Views</span>
         </div>
 
-        <pre
+        {/* <pre
           onCopy={copyText}
           onCut={copyText}
           className="w-full p-5 bg-yellow-100 overflow-auto h-auto whitespace-break-spaces "
           style={!canCopy ? { userSelect: "none" } : {}}
         >
           {text}
-        </pre>
+        </pre> */}
+        <div id="main-content"></div>
       </div>
     </>
   );

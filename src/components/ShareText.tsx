@@ -14,7 +14,7 @@ function ShareText() {
   const navigate = useNavigate();
 
   const generateUrl = async () => {
-    if (text.length === 0) {
+    if (document.getElementById("main-content")?.innerHTML.length === 0) {
       setAlert("Empty text can't be published");
       setTimeout(() => {
         setAlert("");
@@ -25,7 +25,9 @@ function ShareText() {
     const generatedId =
       new Date().getTime().toString() + Math.random().toString();
     await setDoc(doc(db, "sharedText", generatedId), {
-      text: text,
+      text:
+        document.getElementById("main-content")?.innerHTML ||
+        "something went wrong",
       canCopy: canCopy,
       id: generatedId,
       views: 1,
@@ -58,16 +60,13 @@ function ShareText() {
           </button>
         </div>
         <div className="textarea text-center">
-          <textarea
+          <div
             className="w-full border-black border-0 p-2 rounded-md outline-none resize-none"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            name=""
-            id=""
-            cols={30}
-            rows={20}
-            placeholder="start typing here... or paste your text using ctrl + v"
-          ></textarea>
+            contentEditable
+            id="main-content"
+          >
+            {text}
+          </div>
         </div>
         <div className="settings">
           <input
