@@ -1,7 +1,7 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useLocation, useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function PublishedText() {
   const { id } = useParams();
@@ -10,6 +10,7 @@ function PublishedText() {
   const [linkCopied, setLinkCopied] = useState<boolean>(false);
   const [canCopy, setCanCopy] = useState<boolean>(true);
   const [views, setViews] = useState(0);
+  const mainContentRef = useRef<HTMLDivElement>(null);
 
   const location = useLocation();
 
@@ -20,7 +21,9 @@ function PublishedText() {
       const docRef = doc(db, "sharedText", id ? id : "notfound");
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        document.getElementById("main-content").innerHTML = docSnap.data().text;
+        if (mainContentRef.current !== null) {
+          mainContentRef.current.innerHTML = docSnap.data().text;
+        }
         setText(docSnap.data().text);
         setCanCopy(docSnap.data().canCopy);
         setViews(docSnap.data().views);
@@ -55,7 +58,9 @@ function PublishedText() {
       alert("Publisher didn't allowed to Copy given text.");
       return false;
     }
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(
+      mainContentRef.current ? mainContentRef.current.innerText : text
+    );
     setTextCopied(true);
   };
 
@@ -85,15 +90,11 @@ function PublishedText() {
           <span className="p-3 rounded-md mx-3">{views} Views</span>
         </div>
 
-        {/* <pre
-          onCopy={copyText}
-          onCut={copyText}
-          className="w-full p-5 bg-yellow-100 overflow-auto h-auto whitespace-break-spaces "
-          style={!canCopy ? { userSelect: "none" } : {}}
-        >
-          {text}
-        </pre> */}
-        <div id="main-content"></div>
+        <div
+          className="p-3 bg-yellow-100"
+          ref={mainContentRef}
+          id="main-content"
+        ></div>
       </div>
     </>
   );

@@ -5,7 +5,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="border-b-2">
+      <div className="border-b-2 sticky top-0 bg-yellow-100">
         <ul className="md:flex">
           <li className="md:py-1 my-1 font-bold hover:-translate-y-3 duration-500">
             <Link
