@@ -2,6 +2,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useLocation, useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { useEffect, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 function PublishedText() {
   const { id } = useParams();
@@ -55,7 +56,7 @@ function PublishedText() {
 
   const copyText = () => {
     if (canCopy == false) {
-      alert("Publisher didn't allowed to Copy given text.");
+      toast("Publisher didn't allowed to Copy given text");
       return false;
     }
     navigator.clipboard.writeText(
@@ -94,8 +95,10 @@ function PublishedText() {
           className="p-3 bg-yellow-100"
           ref={mainContentRef}
           id="main-content"
+          style={!canCopy ? { userSelect: "none" } : {}}
         ></div>
       </div>
+      <ToastContainer />
     </>
   );
 }
