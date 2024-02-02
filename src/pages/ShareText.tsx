@@ -65,6 +65,7 @@ function ShareText() {
               <label htmlFor="view-once">View Once? </label>
             </div>
           </div>
+
           <button
             onClick={generateUrl}
             className="bg-gray-300 p-4 rounded-md hover:bg-black duration-500 hover:text-white lg:w-1/12 md:w-2/12"

@@ -61,6 +61,7 @@ function LiveRoom() {
       <div className="bg-gray-200 w-11/12 m-auto my-2 rounded-md p-2">
         <div className="buttons py-1 flex justify-between ">
           <span className="text-red-600 font-bold animate-pulse"></span>
+
           <button
             onClick={copyRoomId}
             className="bg-gray-300 p-4 rounded-md hover:bg-black duration-500 hover:text-white lg:w-1/12 md:w-2/12"
