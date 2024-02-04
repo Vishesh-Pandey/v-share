@@ -4,7 +4,7 @@ export const mainContentAtom = atom({
   key: "mainContentAtom",
   default: {
     text: "",
-    canCopy: false,
+    canCopy: true,
     viewOnce: false,
   },
 });
