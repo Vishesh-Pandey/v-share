@@ -17,6 +17,9 @@ function PublishedText() {
 
   useEffect(() => {
     let currentViews = 0;
+    if (mainContentRef.current !== null) {
+      mainContentRef.current.innerHTML = "v-share : Loading...";
+    }
     const loadSharedText = async () => {
       let viewOnce = false;
       const docRef = doc(db, "sharedText", id ? id : "notfound");
