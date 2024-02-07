@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { useRecoilState } from "recoil";
+import { mainContentAtom } from "../atoms";
+
 function ShareText() {
   const [publishing, setPublishing] = useState<boolean>(false);
-  const [canCopy, setCanCopy] = useState<boolean>(true);
-  const [viewOnce, setViewOnce] = useState<boolean>(false);
   const mainContentRef = useRef<HTMLDivElement>(null);
+  const [mainContent, setMainContent] = useRecoilState(mainContentAtom);
 
   const navigate = useNavigate();
 
@@ -18,17 +20,21 @@ function ShareText() {
       toast("Empty text can't be published");
       return;
     }
+    setMainContent({
+      ...mainContent,
+      text: mainContentRef.current?.innerText || "",
+    });
     setPublishing(true);
     const generatedId =
       new Date().getTime().toString() + Math.random().toString();
     await setDoc(doc(db, "sharedText", generatedId), {
       text:
         document.getElementById("main-content")?.innerHTML ||
-        "something went wrong",
-      canCopy: canCopy,
+        "something went wrong while publishing text",
+      canCopy: mainContent.canCopy,
       id: generatedId,
       views: 1,
-      viewOnce: viewOnce,
+      viewOnce: mainContent.viewOnce,
     });
     navigate("/published/" + generatedId);
   };
@@ -47,8 +53,13 @@ function ShareText() {
                 type="checkbox"
                 name=""
                 id="allow-copy"
-                checked={canCopy}
-                onChange={() => setCanCopy(!canCopy)}
+                checked={mainContent.canCopy}
+                onChange={() =>
+                  setMainContent({
+                    ...mainContent,
+                    canCopy: !mainContent.canCopy,
+                  })
+                }
                 className="mx-2"
               />
               <label htmlFor="allow-copy">Allow Viewers to Copy Text? </label>
@@ -58,8 +69,13 @@ function ShareText() {
                 type="checkbox"
                 name=""
                 id="view-once"
-                checked={viewOnce}
-                onChange={() => setViewOnce(!viewOnce)}
+                checked={mainContent.viewOnce}
+                onChange={() =>
+                  setMainContent({
+                    ...mainContent,
+                    viewOnce: !mainContent.viewOnce,
+                  })
+                }
                 className="mx-2"
               />
               <label htmlFor="view-once">View Once? </label>
