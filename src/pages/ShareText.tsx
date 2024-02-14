@@ -15,6 +15,27 @@ function ShareText() {
 
   const navigate = useNavigate();
 
+  const addLocalHistory = (id: string) => {
+    const publishedTextLocal: string | null =
+      localStorage.getItem("publishedText");
+    if (publishedTextLocal != null) {
+      const publishedTextLocalArray = JSON.parse(publishedTextLocal);
+      publishedTextLocalArray?.unshift({
+        title: "",
+        id,
+      });
+      localStorage.setItem(
+        "publishedText",
+        JSON.stringify(publishedTextLocalArray)
+      );
+    } else {
+      localStorage.setItem(
+        "publishedText",
+        JSON.stringify([{ title: "", id }])
+      );
+    }
+  };
+
   const generateUrl = async () => {
     if (mainContentRef.current?.innerHTML.length === 0) {
       toast("Empty text can't be published");
@@ -36,6 +57,7 @@ function ShareText() {
       views: 1,
       viewOnce: mainContent.viewOnce,
     });
+    addLocalHistory(generatedId);
     navigate("/published/" + generatedId);
   };
 
