@@ -10,14 +10,18 @@ import CreateRoom from "./pages/CreateRoom";
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<ShareText />} />
-        <Route path="about" element={<About />} />
-        <Route path="published/:id" element={<PublishedText />} />
-        <Route path="liveroom" element={<CreateRoom />} />
-        <Route path="liveroom/:id" element={<LiveRoom />} />
-      </Routes>
+      <div className="md:flex h-screen">
+        <Navbar />
+        <div className="bg-yellow-300 w-full">
+          <Routes>
+            <Route path="/" element={<ShareText />} />
+            <Route path="about" element={<About />} />
+            <Route path="published/:id" element={<PublishedText />} />
+            <Route path="liveroom" element={<CreateRoom />} />
+            <Route path="liveroom/:id" element={<LiveRoom />} />
+          </Routes>
+        </div>
+      </div>
     </>
   );
 }
