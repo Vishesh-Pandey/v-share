@@ -6,35 +6,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useRecoilState } from "recoil";
-import { mainContentAtom } from "../atoms";
+import { mainContentAtom, publishHistoryAtom } from "../atoms";
 
 function ShareText() {
   const [publishing, setPublishing] = useState<boolean>(false);
   const mainContentRef = useRef<HTMLDivElement>(null);
+
   const [mainContent, setMainContent] = useRecoilState(mainContentAtom);
-
+  const [publishHistory, setPublishHistory] =
+    useRecoilState(publishHistoryAtom);
   const navigate = useNavigate();
-
-  const addLocalHistory = (id: string) => {
-    const publishedTextLocal: string | null =
-      localStorage.getItem("publishedText");
-    if (publishedTextLocal != null) {
-      const publishedTextLocalArray = JSON.parse(publishedTextLocal);
-      publishedTextLocalArray?.unshift({
-        title: "",
-        id,
-      });
-      localStorage.setItem(
-        "publishedText",
-        JSON.stringify(publishedTextLocalArray)
-      );
-    } else {
-      localStorage.setItem(
-        "publishedText",
-        JSON.stringify([{ title: "", id }])
-      );
-    }
-  };
 
   const generateUrl = async () => {
     if (mainContentRef.current?.innerHTML.length === 0) {
@@ -57,7 +38,14 @@ function ShareText() {
       views: 1,
       viewOnce: mainContent.viewOnce,
     });
-    addLocalHistory(generatedId);
+    setPublishHistory([
+      {
+        id: generatedId,
+        title: mainContentRef.current?.innerText.substring(0, 20) || "Untitled",
+      },
+      ...publishHistory,
+    ]);
+
     navigate("/published/" + generatedId);
   };
 
@@ -67,8 +55,8 @@ function ShareText() {
 
   return (
     <>
-      <div className=" w-11/12 m-auto my-2 rounded-md p-2">
-        <div className="buttons py-1 flex justify-between ">
+      <div className="w-full rounded-md">
+        <div className="buttons p-1 flex justify-between bg-yellow-200">
           <div className="settings flex">
             <div className="bg-gray-300 p-2 m-2 rounded-md hover:bg-black hover:text-white duration-500">
               <input
@@ -117,15 +105,21 @@ function ShareText() {
             )}
           </button>
         </div>
-        <div className="textarea">
-          <div
-            ref={mainContentRef}
-            className="w-full border-black border-2 p-2 rounded-md outline-none resize-none min-h-96"
-            contentEditable
-            id="main-content"
-          ></div>
-        </div>
+
+        <div
+          ref={mainContentRef}
+          className="w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto"
+          contentEditable
+          id="main-content"
+          onInput={() => {
+            setMainContent({
+              ...mainContent,
+              text: mainContentRef.current?.innerHTML,
+            });
+          }}
+        ></div>
       </div>
+
       <ToastContainer />
     </>
   );

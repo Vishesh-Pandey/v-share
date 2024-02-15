@@ -4,8 +4,8 @@ import CustomLink from "./CustomLink";
 
 function Navbar() {
   return (
-    <nav>
-      <ul className="flex border-b-2 sticky top-0 bg-yellow-100 w-full md:w-72 md:block">
+    <nav className="md:h-screen md:overflow-auto md:w-72 bg-yellow-200">
+      <ul className="flex sticky top-0 w-full bg-yellow-200 md:block">
         <li className="md:py-1 my-1 font-bold hover:-translate-y-3 duration-500">
           <Link
             className="p-4 font-bold hover:-translate-y-3 duration-500 block"
