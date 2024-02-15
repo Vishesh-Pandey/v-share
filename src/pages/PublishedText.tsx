@@ -15,6 +15,8 @@ function PublishedText() {
   const location = useLocation();
 
   useEffect(() => {
+    if (mainContentRef.current !== null)
+      mainContentRef.current.innerHTML = "v-share : Loading...";
     let currentViews = 0;
     const loadSharedText = async () => {
       let viewOnce = false;
@@ -73,15 +75,15 @@ function PublishedText() {
 
   return (
     <>
-      <div className="w-11/12 m-auto bg-gray-200">
-        <div className="controls p-5">
+      <div className="w-full">
+        <div className="controls p-5 sticky top-0 bg-gray-200">
           <Button onClick={copyText} text={"Copy Text"} />
           <Button onClick={copyLink} text={"Copy Link"} />
           <span className="p-3 rounded-md mx-3">{views} Views</span>
         </div>
 
         <div
-          className="p-3 bg-yellow-100"
+          className="p-3 bg-yellow-100 md:h-auto overflow-auto "
           ref={mainContentRef}
           id="main-content"
           style={!canCopy ? { userSelect: "none" } : {}}

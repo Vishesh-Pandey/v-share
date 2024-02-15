@@ -1,58 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CustomLink from "./CustomLink";
-import Button from "./Button";
-
-interface publishedTextType {
-  title: string;
-  id: string;
-}
+import { useRecoilValue } from "recoil";
+import { publishHistoryAtom } from "../atoms";
 
 function History() {
-  const [publishedText, setpublishedText] = useState<publishedTextType[]>([]);
+  const publishHistory = useRecoilValue(publishHistoryAtom);
 
-  useEffect(() => {
-    const publishHistoryString: string | null =
-      localStorage?.getItem("publishedText");
-
-    if (publishHistoryString != null) {
-      const publishHistoryArray: publishedTextType[] =
-        JSON.parse(publishHistoryString);
-
-      setpublishedText(publishHistoryArray);
-    }
-  }, []);
-
-  const loadHistory = () => {
-    const publishHistoryString: string | null =
-      localStorage?.getItem("publishedText");
-
-    if (publishHistoryString != null) {
-      const publishHistoryArray: publishedTextType[] =
-        JSON.parse(publishHistoryString);
-
-      setpublishedText(publishHistoryArray);
-    }
-  };
-
-  const clearHistory = () => {
-    localStorage.setItem("publishedText", "[]");
-    loadHistory();
-  };
+  useEffect(() => {}, []);
 
   return (
-    <div>
+    <div className="bg-red-300 max-h-96 md:h-1/2 overflow-auto">
       <h2 className="text-center font-bold">Published Pages</h2>
-      <Button text="Load Recent History" onClick={loadHistory} />
-      <Button text="Clear" onClick={clearHistory} />
-      {publishedText?.map((element, index) => {
-        if (index < 5)
+      {publishHistory?.map(
+        (element: { id: string; title: string }, index: number) => {
           return (
             <CustomLink
+              key={element.id}
               path={`published/${element.id}`}
-              text={`Published - ${index + 1}`}
+              text={`${index + 1}: ${element.title}`}
             />
           );
-      })}
+        }
+      )}
     </div>
   );
 }

@@ -12,7 +12,7 @@ function App() {
     <>
       <div className="md:flex h-screen">
         <Navbar />
-        <div className="bg-yellow-300 w-full">
+        <div className="bg-yellow-100 w-full max-h-screen overflow-auto">
           <Routes>
             <Route path="/" element={<ShareText />} />
             <Route path="about" element={<About />} />
