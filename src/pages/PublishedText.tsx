@@ -76,14 +76,14 @@ function PublishedText() {
   return (
     <>
       <div className="w-full">
-        <div className="controls p-5 sticky top-0 bg-gray-200">
+        <div className="controls p-5 sticky top-0 bg-skin-fill">
           <Button onClick={copyText} text={"Copy Text"} />
           <Button onClick={copyLink} text={"Copy Link"} />
           <span className="p-3 rounded-md mx-3">{views} Views</span>
         </div>
 
         <div
-          className="p-3 bg-yellow-100 md:h-auto overflow-auto "
+          className="p-3 bg-skin-fill text-skin-base md:h-auto overflow-auto "
           ref={mainContentRef}
           id="main-content"
           style={!canCopy ? { userSelect: "none" } : {}}
