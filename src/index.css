@@ -1,3 +1,63 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-text-base: #161515;
+    --color-text-muted: #c7d2fe;
+    --color-text-inverted: #4f46e5;
+    --color-fill: #f1f1f1;
+    --color-button-accent: #d5d3d3;
+    --color-button-accent-hover: #878787;
+    --color-button-muted: #6366f1;
+  }
+
+  .dark {
+    --color-text-base: #5c5b5b;
+    --color-text-muted: #c7d2fe;
+    --color-text-inverted: #e4e4ee;
+    --color-fill: #0e0e0e;
+    --color-button-accent: #3a3a3a;
+    --color-button-accent-hover: #878787;
+    --color-button-muted: #6366f1;
+  }
+
+  /* :root {
+    --color-text-base: #ffffff;
+    --color-text-muted: #c7d2fe;
+    --color-text-inverted: #4f46e5;
+    --color-fill: #f1f1f1;
+    --color-button-accent: #d5d3d3;
+    --color-button-accent-hover: #878787;
+    --color-button-muted: #6366f1;
+  }
+
+  .dark {
+    --color-text-base: #ece7e7;
+    --color-text-muted: #c7d2fe;
+    --color-text-inverted: #e4e4ee;
+    --color-fill: #0e0e0e;
+    --color-button-accent: #3a3a3a;
+    --color-button-accent-hover: #878787;
+    --color-button-muted: #6366f1;
+  } */
+
+  /* :root {
+    --bg-background: #fcfcfc;
+    --text-foreground: #07080a;
+    --outline: #afb1b3;
+    --primary: #0f87ff;
+    --positive: #00a11b;
+    --negative: #fa4b4b;
+  }
+
+  .theme-dark {
+    --bg-background: #1c2333;
+    --text-foreground: #f5f9fc;
+    --outline: #4e5569;
+    --primary: #0f87ff;
+    --positive-color: #00a11b;
+    --negative-color: #fa4b4b;
+  } */
+}

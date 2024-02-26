@@ -6,13 +6,18 @@ import PublishedText from "./pages/PublishedText";
 import About from "./pages/About";
 import LiveRoom from "./pages/LiveRoom";
 import CreateRoom from "./pages/CreateRoom";
+import { useRecoilValue } from "recoil";
+import { themeAtom } from "./atoms";
 
 function App() {
+  const theme = useRecoilValue(themeAtom);
   return (
     <>
-      <div className="md:flex h-screen">
+      <div
+        className={`md:flex h-screen ${theme === "dark" ? "dark" : "light"} `}
+      >
         <Navbar />
-        <div className="bg-yellow-100 w-full max-h-screen overflow-auto">
+        <div className="bg-skin-fill w-full max-h-screen overflow-auto">
           <Routes>
             <Route path="/" element={<ShareText />} />
             <Route path="about" element={<About />} />

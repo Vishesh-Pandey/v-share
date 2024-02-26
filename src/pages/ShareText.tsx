@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { useRecoilState } from "recoil";
 import { mainContentAtom, publishHistoryAtom } from "../atoms";
+import Checkbox from "../components/Checkbox";
+import Button from "../components/Button";
 
 function ShareText() {
   const [publishing, setPublishing] = useState<boolean>(false);
@@ -56,59 +58,39 @@ function ShareText() {
   return (
     <>
       <div className="w-full rounded-md">
-        <div className="buttons p-1 flex justify-between bg-yellow-200">
+        <div className="buttons p-1 flex justify-between bg-skin-fill">
           <div className="settings flex">
-            <div className="bg-gray-300 p-2 m-2 rounded-md hover:bg-black hover:text-white duration-500">
-              <input
-                type="checkbox"
-                name=""
-                id="allow-copy"
-                checked={mainContent.canCopy}
-                onChange={() =>
-                  setMainContent({
-                    ...mainContent,
-                    canCopy: !mainContent.canCopy,
-                  })
-                }
-                className="mx-2"
-              />
-              <label htmlFor="allow-copy">Allow Viewers to Copy Text? </label>
-            </div>
-            <div className="bg-gray-300 p-2 m-2 rounded-md hover:bg-black hover:text-white duration-500">
-              <input
-                type="checkbox"
-                name=""
-                id="view-once"
-                checked={mainContent.viewOnce}
-                onChange={() =>
-                  setMainContent({
-                    ...mainContent,
-                    viewOnce: !mainContent.viewOnce,
-                  })
-                }
-                className="mx-2"
-              />
-              <label htmlFor="view-once">View Once? </label>
-            </div>
+            <Checkbox
+              text="Allow viewers to copy text?"
+              value={mainContent.canCopy}
+              onClick={() =>
+                setMainContent({
+                  ...mainContent,
+                  canCopy: !mainContent.canCopy,
+                })
+              }
+            />
+            <Checkbox
+              text="View Once?"
+              value={mainContent.viewOnce}
+              onClick={() =>
+                setMainContent({
+                  ...mainContent,
+                  viewOnce: !mainContent.viewOnce,
+                })
+              }
+            />
           </div>
 
-          <button
+          <Button
             onClick={generateUrl}
-            className="bg-gray-300 p-4 rounded-md hover:bg-black duration-500 hover:text-white lg:w-1/12 md:w-2/12"
-          >
-            {publishing ? (
-              <button className="animate-spin ">
-                <i className="bi bi-arrow-repeat"></i>
-              </button>
-            ) : (
-              <span>Publish</span>
-            )}
-          </button>
+            text={publishing ? `Publishing...` : "Publish"}
+          />
         </div>
 
         <div
           ref={mainContentRef}
-          className="w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto"
+          className="w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto text-skin-base"
           contentEditable
           id="main-content"
           onInput={() => {

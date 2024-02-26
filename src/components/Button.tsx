@@ -7,7 +7,7 @@ function Button(prop: propType) {
   return (
     <button
       onClick={prop.onClick}
-      className="bg-green-300 p-4 rounded-md hover:bg-green-400 duration-500 mx-2"
+      className="bg-skin-button-accent hover:bg-skin-button-accent-hover text-skin-inverted p-4 rounded-md duration-500 mx-2"
     >
       {prop.text}
     </button>

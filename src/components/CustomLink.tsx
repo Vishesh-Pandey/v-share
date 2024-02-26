@@ -13,8 +13,8 @@ function CustomLink(prop: propType) {
       to={prop.path}
       className={`p-4 mx-1 rounded-md duration-500 block ${
         location.pathname === prop.path
-          ? "bg-black text-white"
-          : "hover:bg-black hover:text-white bg-gray-300"
+          ? "bg-skin-button-accent-hover text-skin-inverted"
+          : "bg-skin-button-accent text-skin-inverted hover:bg-skin-button-accent-hovere"
       } `}
     >
       {prop.text}

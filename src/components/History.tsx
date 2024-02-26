@@ -9,7 +9,7 @@ function History() {
   useEffect(() => {}, []);
 
   return (
-    <div className="bg-red-300 max-h-96 md:h-1/2 overflow-auto">
+    <div className="bg-skin-fill text-skin-base max-h-96 md:h-1/2 overflow-auto">
       <h2 className="text-center font-bold">Published Pages</h2>
       {publishHistory?.map(
         (element: { id: string; title: string }, index: number) => {
