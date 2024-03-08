@@ -2,6 +2,8 @@ import { onValue, ref, set } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { realtimedb } from "../firebase";
 import { useParams } from "react-router-dom";
+import Button from "../components/Button";
+import { ToastContainer, toast } from "react-toastify";
 
 type TextData = {
   text: string;
@@ -12,7 +14,6 @@ function LiveRoom() {
   const { id } = useParams();
 
   const [text, setText] = useState<string>("");
-  const [roomIdCopied, setRoomIdCopied] = useState<boolean>(false);
 
   const updateFirebaseDatabase = async (currentText: string) => {
     set(ref(realtimedb, "liveroom/" + `${id}`), {
@@ -24,10 +25,7 @@ function LiveRoom() {
     navigator.clipboard.writeText(
       `https://share.visheshpandey.com/#liveroom/${id}`
     );
-    setRoomIdCopied(true);
-    setTimeout(() => {
-      setRoomIdCopied(false);
-    }, 3000);
+    toast("Room Id copied to clipboard");
   };
 
   useEffect(() => {
@@ -58,28 +56,13 @@ function LiveRoom() {
 
   return (
     <>
-      <div className="bg-gray-200 w-11/12 m-auto my-2 rounded-md p-2">
-        <div className="buttons py-1 flex justify-between ">
-          <span className="text-red-600 font-bold animate-pulse"></span>
-
-          <button
-            onClick={copyRoomId}
-            className="bg-gray-300 p-4 rounded-md hover:bg-black duration-500 hover:text-white lg:w-1/12 md:w-2/12"
-          >
-            {roomIdCopied ? (
-              <span>
-                Copied <i className="bi bi-clipboard2-check"></i>
-              </span>
-            ) : (
-              <span>
-                Invite <i className="bi bi-clipboard-plus"></i>
-              </span>
-            )}
-          </button>
+      <div className="bg-skin-button-accent w-11/12 m-auto my-2 rounded-md p-2">
+        <div className="buttons py-1 flex justify-end ">
+          <Button onClick={copyRoomId} text="Invite" />
         </div>
         <div className="textarea  text-center">
           <textarea
-            className="w-full border-black border-0 p-2 rounded-md outline-none resize-none"
+            className="w-full p-2 rounded-md outline-none resize-none bg-skin-fill text-skin-base"
             value={text}
             onChange={(e) => {
               setText(e.target.value);
@@ -95,10 +78,11 @@ function LiveRoom() {
       </div>
 
       <div className="details w-11/12 m-auto my-2">
-        <p className="text-white bg-gray-400 p-2 rounded-lg font-bold">
+        <p className="text-skin-base bg-skin-fill p-2 rounded-lg font-bold">
           Text here will get updated in realtime due to other collaborators
         </p>
       </div>
+      <ToastContainer />
     </>
   );
 }

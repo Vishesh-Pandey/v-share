@@ -90,7 +90,7 @@ function ShareText() {
 
         <div
           ref={mainContentRef}
-          className="w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto text-skin-base"
+          className="bg-skin-button-accent w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto text-skin-base"
           contentEditable
           id="main-content"
           onInput={() => {

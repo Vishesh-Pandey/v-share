@@ -83,7 +83,7 @@ function PublishedText() {
         </div>
 
         <div
-          className="p-3 bg-skin-fill text-skin-base md:h-auto overflow-auto "
+          className="p-3 text-skin-base bg-skin-button-accent md:h-auto overflow-auto rounded"
           ref={mainContentRef}
           id="main-content"
           style={!canCopy ? { userSelect: "none" } : {}}
