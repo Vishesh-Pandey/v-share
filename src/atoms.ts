@@ -26,6 +26,12 @@ export const publishedFilesLinkAtom = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const userLiveRoomIdAtom = atom({
+  key: "userLiveRoomIdAtom",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
 export const viewHistoryAtom = atom({
   key: "viewHistory",
   default: [],

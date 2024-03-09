@@ -9,7 +9,9 @@ function History() {
   return (
     <div>
       <h2 className="bg-skin-base text-skin-base text-xl font-semibold text-center py-2">
-        Published Pages
+        {publishHistory.length === 0
+          ? "You haven't published anything Yet"
+          : "Published Pages"}
       </h2>
       <div className="bg-skin-fill text-skin-base flex flex-wrap">
         {publishHistory?.map(

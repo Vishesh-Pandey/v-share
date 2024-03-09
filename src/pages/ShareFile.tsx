@@ -81,7 +81,9 @@ function ShareFile() {
       </div>
 
       <h2 className="bg-skin-base text-skin-base text-xl font-semibold text-center py-2">
-        Previously Uploaded Files
+        {publishedFilesLink.length === 0
+          ? "You haven't published any file yet"
+          : "Previously Uploaded Files"}
       </h2>
       <div className="flex flex-wrap">
         {publishedFilesLink.map((id: string) => {

@@ -8,7 +8,7 @@ function Navbar() {
 
   return (
     <nav className="md:h-screen md:overflow-auto md:w-80 bg-skin-fill">
-      <ul className="flex sticky top-0 w-full bg-black-200 md:block">
+      <ul className="flex flex-wrap sticky top-0 w-full bg-black-200 md:block">
         <li className="md:py-1 my-1 font-bold duration-500 flex align-middle">
           <Link
             className="p-4 font-bold hover:-translate-y-5 duration-500 block text-skin-inverted"
