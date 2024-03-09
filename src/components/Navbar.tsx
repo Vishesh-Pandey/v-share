@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import History from "./History";
 import CustomLink from "./CustomLink";
 import { useRecoilState } from "recoil";
 import { themeAtom } from "../atoms";
@@ -38,12 +37,13 @@ function Navbar() {
         <li className="md:py-1 my-1 relative">
           <CustomLink text="Live Room" path="/liveroom" />
         </li>
+        <li className="md:py-1 my-1 relative">
+          <CustomLink text="History" path="/history" />
+        </li>
         <li className="md:py-1 my-1">
           <CustomLink text="About" path="/about" />
         </li>
       </ul>
-
-      <History />
     </nav>
   );
 }

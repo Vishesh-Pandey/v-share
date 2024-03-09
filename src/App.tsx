@@ -10,6 +10,7 @@ import { useRecoilValue } from "recoil";
 import { themeAtom } from "./atoms";
 import ShareFile from "./pages/ShareFile";
 import PublishedFile from "./pages/PublishedFile";
+import History from "./pages/History";
 
 function App() {
   const theme = useRecoilValue(themeAtom);
@@ -22,12 +23,14 @@ function App() {
         <div className="bg-skin-fill w-full max-h-screen overflow-auto">
           <Routes>
             <Route path="/" element={<ShareText />} />
-            <Route path="about" element={<About />} />
             <Route path="published/:id" element={<PublishedText />} />
-            <Route path="liveroom" element={<CreateRoom />} />
-            <Route path="liveroom/:id" element={<LiveRoom />} />
             <Route path="shareFile" element={<ShareFile />} />
             <Route path="sharedFile/:id" element={<PublishedFile />} />
+            <Route path="liveroom" element={<CreateRoom />} />
+            <Route path="liveroom/:id" element={<LiveRoom />} />
+            <Route path="history" element={<History />} />
+
+            <Route path="about" element={<About />} />
           </Routes>
         </div>
       </div>

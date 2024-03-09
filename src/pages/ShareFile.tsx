@@ -81,7 +81,7 @@ function ShareFile() {
       </div>
 
       <h2 className="bg-skin-base text-skin-base text-xl font-semibold text-center py-2">
-        Previously Uploaded Files{" "}
+        Previously Uploaded Files
       </h2>
       <div className="flex flex-wrap">
         {publishedFilesLink.map((id: string) => {
