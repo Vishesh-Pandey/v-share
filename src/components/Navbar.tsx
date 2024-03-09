@@ -32,6 +32,9 @@ function Navbar() {
         <li className="md:py-1 my-1">
           <CustomLink path="/" text="Home" />
         </li>
+        <li className="md:py-1 my-1">
+          <CustomLink path="/shareFile" text="Share Files" />
+        </li>
         <li className="md:py-1 my-1 relative">
           <CustomLink text="Live Room" path="/liveroom" />
         </li>

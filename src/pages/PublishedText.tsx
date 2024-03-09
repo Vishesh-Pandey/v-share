@@ -78,7 +78,7 @@ function PublishedText() {
       <div className="w-full">
         <div className="controls p-5 sticky top-0 bg-skin-fill">
           <Button onClick={copyText} text={"Copy Text"} />
-          <Button onClick={copyLink} text={"Copy Link"} />
+          <Button onClick={copyLink} text={"Share"} />
           <span className="p-3 rounded-md mx-3">{views} Views</span>
         </div>
 

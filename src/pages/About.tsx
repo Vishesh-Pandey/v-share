@@ -1,10 +1,10 @@
 function About() {
   return (
     <div className="text-center">
-      <div className="font-bold text-2xl p-5 bg-skin-fill text-skin-base rounded-md w-11/12 m-auto my-2">
+      <div className="font-bold text-xl p-5 bg-skin-fill text-skin-base rounded-md w-11/12 m-auto my-2">
         <p className="my-4">
-          v-share is an open source project that helps you to share huge
-          text/code with others easily
+          v-share is an open source project that helps you to share huge text,
+          code and even large files with others easily
         </p>
         <a
           className="hover:bg-skin-button-accent-hover font-bold p-2 rounded-md duration-500"

@@ -8,6 +8,8 @@ import LiveRoom from "./pages/LiveRoom";
 import CreateRoom from "./pages/CreateRoom";
 import { useRecoilValue } from "recoil";
 import { themeAtom } from "./atoms";
+import ShareFile from "./pages/ShareFile";
+import PublishedFile from "./pages/PublishedFile";
 
 function App() {
   const theme = useRecoilValue(themeAtom);
@@ -24,6 +26,8 @@ function App() {
             <Route path="published/:id" element={<PublishedText />} />
             <Route path="liveroom" element={<CreateRoom />} />
             <Route path="liveroom/:id" element={<LiveRoom />} />
+            <Route path="shareFile" element={<ShareFile />} />
+            <Route path="sharedFile/:id" element={<PublishedFile />} />
           </Routes>
         </div>
       </div>
