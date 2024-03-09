@@ -20,6 +20,12 @@ export const publishHistoryAtom = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const publishedFilesLinkAtom = atom({
+  key: "publishedFilesLink",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
+});
+
 export const viewHistoryAtom = atom({
   key: "viewHistory",
   default: [],
