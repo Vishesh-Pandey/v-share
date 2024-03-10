@@ -17,7 +17,9 @@ function App() {
   return (
     <>
       <div
-        className={`md:flex h-screen ${theme === "dark" ? "dark" : "light"} `}
+        className={`relative overflow-x-hidden md:flex h-screen bg-skin-fill ${
+          theme === "dark" ? "dark" : "light"
+        } `}
       >
         <Navbar />
         <div className="bg-skin-fill w-full max-h-screen overflow-auto">

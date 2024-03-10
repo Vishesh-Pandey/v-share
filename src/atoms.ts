@@ -32,6 +32,12 @@ export const userLiveRoomIdAtom = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const toggleSidebarAtom = atom({
+  key: "toggleSidebarAtom",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
+
 export const viewHistoryAtom = atom({
   key: "viewHistory",
   default: [],
