@@ -32,10 +32,12 @@ function ShareText() {
     const generatedId =
       new Date().getTime().toString() + Math.random().toString();
     await setDoc(doc(db, "sharedText", generatedId), {
-      text:
+      content:
         document.getElementById("main-content")?.innerHTML ||
         "something went wrong while publishing text",
+      text: document.getElementById("main-content")?.innerText,
       canCopy: mainContent.canCopy,
+      createdOn: new Date().toISOString(),
       id: generatedId,
       views: 1,
       viewOnce: mainContent.viewOnce,
