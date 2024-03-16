@@ -85,20 +85,24 @@ function ShareFile() {
           ? "You haven't published any file yet"
           : "Previously Uploaded Files"}
       </h2>
-      <div className="flex flex-wrap">
+      <ul className="">
         {publishedFilesLink.map((id: string) => {
           return (
-            <div className="p-2" key={id}>
+            <li
+              className="p-2 border-t border-b text-primary-foreground flex justify-between align-middle"
+              key={id}
+            >
+              <p className="flex flex-col justify-center">{id}</p>
               <Button
-                text={id}
+                text="Open"
                 onClick={() => {
                   navigate(`/sharedFile/${id}`);
                 }}
               />
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <ToastContainer />
     </div>

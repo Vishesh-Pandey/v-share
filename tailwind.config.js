@@ -4,6 +4,12 @@ export default {
   content: ["./src/**/*.{html,js,tsx}", ".tsx"],
   theme: {
     extend: {
+      colors: {
+        primary: "var(--primary)",
+        "primary-foreground": "var(--primary-foreground)",
+        secondary: "var(--secondary)",
+        "secondary-foreground": "var(--secondary-foreground)",
+      },
       textColor: {
         skin: {
           base: "var(--color-text-base)",
@@ -17,11 +23,6 @@ export default {
           "button-accent": "var(--color-button-accent)",
           "button-accent-hover": "var(--color-button-accent-hover)",
           "button-muted": "var(--color-button-muted)",
-        },
-      },
-      gradientColorStops: {
-        skin: {
-          hue: "var(--color-fill)",
         },
       },
     },
