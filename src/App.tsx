@@ -22,7 +22,7 @@ function App() {
         } `}
       >
         <Navbar />
-        <div className="bg-skin-fill w-full max-h-screen overflow-auto">
+        <div className="bg-skin-fill w-full max-h-screen overflow-auto p-2">
           <Routes>
             <Route path="/" element={<ShareText />} />
             <Route path="published/:id" element={<PublishedText />} />

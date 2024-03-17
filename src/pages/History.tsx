@@ -13,22 +13,29 @@ function History() {
           ? "You haven't published anything Yet"
           : "Published Pages"}
       </h2>
-      <div className="bg-skin-fill text-skin-base flex flex-wrap">
-        {publishHistory?.map(
+
+      <ul className="">
+        {publishHistory.map(
           (element: { id: string; title: string }, index: number) => {
             return (
-              <div className="p-2" key={element.title}>
+              <li
+                className="p-2 border-t border-b text-primary-foreground flex justify-between align-middle hover:bg-secondary"
+                key={element.id}
+              >
+                <p className="flex flex-col justify-center">
+                  {index + 1} - {element.title} - {element.id}
+                </p>
                 <Button
-                  text={index + " - " + element.title}
+                  text="Open"
                   onClick={() => {
                     navigate(`/published/${element.id}`);
                   }}
                 />
-              </div>
+              </li>
             );
           }
         )}
-      </div>
+      </ul>
     </div>
   );
 }

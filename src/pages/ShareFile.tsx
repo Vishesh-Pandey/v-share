@@ -89,7 +89,7 @@ function ShareFile() {
         {publishedFilesLink.map((id: string) => {
           return (
             <li
-              className="p-2 border-t border-b text-primary-foreground flex justify-between align-middle"
+              className="p-2 border-t border-b text-primary-foreground flex justify-between align-middle hover:bg-secondary"
               key={id}
             >
               <p className="flex flex-col justify-center">{id}</p>

@@ -27,20 +27,26 @@ function CreateRoom() {
           : "Live Rooms Created By You"}
       </h2>
 
-      <div className="flex flex-wrap">
+      <ul className="">
         {userLiveRoomId.map((id: string, index: number) => {
           return (
-            <div className="p-2" key={id}>
+            <li
+              className="p-2 border-t border-b text-primary-foreground flex justify-between align-middle hover:bg-secondary"
+              key={id}
+            >
+              <p className="flex flex-col justify-center">
+                {index + 1} - {id}
+              </p>
               <Button
-                text={`Room ${index + 1} : ${id}`}
+                text="Open"
                 onClick={() => {
                   navigate(`/liveroom/${id}`);
                 }}
               />
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </>
   );
 }

@@ -46,6 +46,6 @@ export const viewHistoryAtom = atom({
 
 export const themeAtom = atom({
   key: "themeAtom",
-  default: "dark",
+  default: "light",
   effects_UNSTABLE: [persistAtom],
 });

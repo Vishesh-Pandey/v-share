@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { v4 } from "uuid";
 
 import { useRecoilState } from "recoil";
 import { mainContentAtom, publishHistoryAtom } from "../atoms";
@@ -20,37 +21,42 @@ function ShareText() {
   const navigate = useNavigate();
 
   const generateUrl = async () => {
-    if (mainContentRef.current?.innerHTML.length === 0) {
-      toast("Empty text can't be published");
-      return;
-    }
-    setMainContent({
-      ...mainContent,
-      text: mainContentRef.current?.innerText || "",
-    });
-    setPublishing(true);
-    const generatedId =
-      new Date().getTime().toString() + Math.random().toString();
-    await setDoc(doc(db, "sharedText", generatedId), {
-      content:
-        document.getElementById("main-content")?.innerHTML ||
-        "something went wrong while publishing text",
-      text: document.getElementById("main-content")?.innerText,
-      canCopy: mainContent.canCopy,
-      createdOn: new Date().toISOString(),
-      id: generatedId,
-      views: 1,
-      viewOnce: mainContent.viewOnce,
-    });
-    setPublishHistory([
-      {
+    try {
+      if (mainContentRef.current?.innerHTML.length === 0) {
+        toast("Empty text can't be published");
+        return;
+      }
+      setMainContent({
+        ...mainContent,
+        text: mainContentRef.current?.innerText || "",
+      });
+      setPublishing(true);
+      const generatedId = v4();
+      await setDoc(doc(db, "sharedText", generatedId), {
+        content:
+          document.getElementById("main-content")?.innerHTML ||
+          "something went wrong while publishing text",
+        text: document.getElementById("main-content")?.innerText,
+        canCopy: mainContent.canCopy,
+        createdOn: new Date().toISOString(),
         id: generatedId,
-        title: mainContentRef.current?.innerText.substring(0, 20) || "Untitled",
-      },
-      ...publishHistory,
-    ]);
+        views: 1,
+        viewOnce: mainContent.viewOnce,
+      });
+      setPublishHistory([
+        {
+          id: generatedId,
+          title:
+            mainContentRef.current?.innerText.substring(0, 20) || "Untitled",
+        },
+        ...publishHistory,
+      ]);
 
-    navigate("/published/" + generatedId);
+      navigate("/published/" + generatedId);
+    } catch (error) {
+      setPublishing(false);
+      toast("Something went wrong");
+    }
   };
 
   useEffect(() => {
@@ -59,8 +65,8 @@ function ShareText() {
 
   return (
     <>
-      <div className="w-full rounded-md">
-        <div className="buttons p-1 flex justify-between bg-skin-fill">
+      <div className="w-full">
+        <div className="buttons flex justify-between ">
           <div className="settings flex">
             <Checkbox
               text="Allow viewers to copy text?"

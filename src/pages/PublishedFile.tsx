@@ -9,9 +9,11 @@ function PublishedFile() {
   const { id } = useParams();
   const [fileUrl, setFileUrl] = useState<string>("");
   const [fileType, setFileType] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const initializeFile = async () => {
+      setLoading(true);
       getDownloadURL(ref(storage, id))
         .then((url) => {
           setFileUrl(url);
@@ -29,6 +31,7 @@ function PublishedFile() {
         metaDataString = metadata.contentType.toString();
       }
       setFileType(metaDataString);
+      setLoading(false);
     };
 
     initializeFile();
@@ -55,6 +58,14 @@ function PublishedFile() {
           }}
         />
       </div>
+
+      {loading ? (
+        <h1 className="text-5xl text-secondary-foreground p-5">
+          Loading File Please Wait!
+        </h1>
+      ) : (
+        ""
+      )}
 
       <div className="w-full">
         {fileType.startsWith("image/") ? (

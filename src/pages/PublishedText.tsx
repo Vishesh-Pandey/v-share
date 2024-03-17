@@ -113,7 +113,7 @@ function PublishedText() {
           style={!canCopy ? { userSelect: "none" } : {}}
         ></div>
         <div>
-          <p>Created on : {createdOn}</p>
+          <p className="text-secondary-foreground">Created on : {createdOn}</p>
         </div>
       </div>
       <ToastContainer />
