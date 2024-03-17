@@ -60,9 +60,17 @@ function ShareFile() {
           text={publishing ? "Publishing..." : "Publish"}
         />
       </div>
-      <div className="flex justify-center">
+      <div className="text-center">
+        <label
+          className="text-primary-foreground block w-full text-center"
+          htmlFor="file-upload"
+        >
+          Choose or drag and drop a file below
+        </label>
+
         <input
-          className="p-2 text-skin-base"
+          id="file-upload"
+          className="p-5 text-skin-base bg-secondary rounded h-60 w-1/2 border-2"
           onChange={handleFileChange}
           type="file"
         />
@@ -74,7 +82,7 @@ function ShareFile() {
             setDescription(e.target.value.replace(" ", "-"));
           }}
           maxLength={20}
-          className="p-2 w-full md:w-1/2 my-2 rounded"
+          className="p-2 w-full md:w-1/2 my-2 rounded bg-secondary text-primary"
           type="text"
           placeholder="enter description for the file"
         />
