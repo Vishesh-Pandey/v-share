@@ -58,6 +58,7 @@ function ShareText() {
       toast("Something went wrong");
     }
   };
+  console.log(mainContent);
 
   useEffect(() => {
     mainContentRef.current?.focus();
@@ -96,18 +97,28 @@ function ShareText() {
           />
         </div>
 
-        <div
-          ref={mainContentRef}
-          className="w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto text-skin-base"
-          contentEditable
-          id="main-content"
-          onInput={() => {
-            setMainContent({
-              ...mainContent,
-              text: mainContentRef.current?.innerHTML,
-            });
-          }}
-        ></div>
+        <div className="Editor relative">
+          <div
+            ref={mainContentRef}
+            className="w-full p-2 rounded-md outline-none resize-none min-h-96 whitespace-pre-wrap overflow-x-auto text-skin-base"
+            contentEditable
+            id="main-content"
+            onInput={() => {
+              setMainContent({
+                ...mainContent,
+                text: mainContentRef.current?.innerHTML,
+              });
+            }}
+          ></div>
+          <div
+            className={`absolute top-0 left-0 text-gray-400 p-2 ${
+              mainContent.text === "" ? "" : "hidden"
+            }`}
+          >
+            Start typing anything here and share easily by clicking on
+            publishing. You can paste images/screenshots too.
+          </div>
+        </div>
       </div>
 
       <ToastContainer />

@@ -70,7 +70,9 @@ function ShareFile() {
 
         <input
           id="file-upload"
-          className="p-5 text-skin-base bg-secondary rounded h-60 w-1/2 border-2"
+          className={`p-5 text-primary-foreground bg-secondary rounded h-60 w-1/2 border-2 cursor-pointer hover:bg-primary ${
+            file === null ? "" : "bg-green-700"
+          }`}
           onChange={handleFileChange}
           type="file"
         />
