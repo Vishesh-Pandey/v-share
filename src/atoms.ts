@@ -1,3 +1,4 @@
+import { User } from "firebase/auth";
 import { atom } from "recoil";
 
 import { recoilPersist } from "recoil-persist";
@@ -48,4 +49,19 @@ export const themeAtom = atom({
   key: "themeAtom",
   default: "light",
   effects_UNSTABLE: [persistAtom],
+});
+
+interface AuthAtomType {
+  currentUser: User | null;
+  isAnonymous: boolean;
+  loading: boolean;
+}
+
+export const authAtom = atom<AuthAtomType>({
+  key: "authAtom",
+  default: {
+    currentUser: null,
+    isAnonymous: false,
+    loading: false,
+  },
 });
