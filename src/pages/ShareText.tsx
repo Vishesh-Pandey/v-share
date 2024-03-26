@@ -1,5 +1,5 @@
 import { doc, setDoc } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,6 +10,8 @@ import { useRecoilState } from "recoil";
 import { mainContentAtom, publishHistoryAtom } from "../atoms";
 import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
+import { AuthContext } from "../context/AuthContext";
+import { SharedTextType } from "../types";
 
 function ShareText() {
   const [publishing, setPublishing] = useState<boolean>(false);
@@ -18,7 +20,10 @@ function ShareText() {
   const [mainContent, setMainContent] = useRecoilState(mainContentAtom);
   const [publishHistory, setPublishHistory] =
     useRecoilState(publishHistoryAtom);
+
   const navigate = useNavigate();
+
+  const authContext = useContext(AuthContext);
 
   const generateUrl = async () => {
     try {
@@ -31,18 +36,28 @@ function ShareText() {
         text: mainContentRef.current?.innerText || "",
       });
       setPublishing(true);
+
       const generatedId = v4();
-      await setDoc(doc(db, "sharedText", generatedId), {
-        content:
-          document.getElementById("main-content")?.innerHTML ||
-          "something went wrong while publishing text",
-        text: document.getElementById("main-content")?.innerText,
-        canCopy: mainContent.canCopy,
-        createdOn: new Date().toISOString(),
+
+      const textToPublish: SharedTextType = {
         id: generatedId,
-        views: 1,
+        content: document.getElementById("main-content")?.innerHTML || (
+          <span>something went wrong while publishing text</span>
+        ),
+        text: document.getElementById("main-content")?.innerText,
+        createdOn: new Date().toISOString(),
+        user:
+          authContext.currentUser === null
+            ? "anonymous"
+            : authContext.currentUser.uid,
+        canCopy: mainContent.canCopy,
         viewOnce: mainContent.viewOnce,
-      });
+        views: 1,
+      };
+      // saving information to firebase
+      await setDoc(doc(db, "sharedText", generatedId), textToPublish);
+
+      // save history to localStorage
       setPublishHistory([
         {
           id: generatedId,
@@ -56,9 +71,9 @@ function ShareText() {
     } catch (error) {
       setPublishing(false);
       toast("Something went wrong");
+      console.log("error : ", error);
     }
   };
-  console.log(mainContent);
 
   useEffect(() => {
     mainContentRef.current?.focus();

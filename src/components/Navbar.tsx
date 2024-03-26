@@ -3,10 +3,15 @@ import NavLink from "./NavLink";
 import { useRecoilState } from "recoil";
 import { themeAtom, toggleSidebarAtom } from "../atoms";
 import Button from "./Button";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
+  // const authState = useRecoilValue(authAtom);
   const [theme, setTheme] = useRecoilState(themeAtom);
   const [toggleSidebar, setToggleSidebar] = useRecoilState(toggleSidebarAtom);
+
+  const authContext = useContext(AuthContext);
 
   return (
     <nav className="md:overflow-auto overflow-x-hidden md:w-80 bg-secondary">
@@ -63,7 +68,13 @@ function Navbar() {
         <li className="md:py-1">
           <NavLink text="About" path="/about" />
         </li>
-        <li></li>
+        <li className="md:py-1">
+          {authContext.currentUser === null ? (
+            <NavLink text={"Login"} path="/account" />
+          ) : (
+            <NavLink text={"Account"} path="/account" />
+          )}
+        </li>
       </ul>
     </nav>
   );

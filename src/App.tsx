@@ -11,9 +11,11 @@ import { themeAtom } from "./atoms";
 import ShareFile from "./pages/ShareFile";
 import PublishedFile from "./pages/PublishedFile";
 import History from "./pages/History";
+import Account from "./pages/Account";
 
 function App() {
   const theme = useRecoilValue(themeAtom);
+
   return (
     <>
       <div
@@ -33,6 +35,7 @@ function App() {
             <Route path="history" element={<History />} />
 
             <Route path="about" element={<About />} />
+            <Route path="account" element={<Account />} />
           </Routes>
         </div>
       </div>
