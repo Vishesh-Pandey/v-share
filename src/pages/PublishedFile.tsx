@@ -11,6 +11,8 @@ function PublishedFile() {
   const [fileType, setFileType] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
+  console.log(id);
+
   useEffect(() => {
     const initializeFile = async () => {
       setLoading(true);

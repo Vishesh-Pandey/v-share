@@ -65,6 +65,9 @@ function Navbar() {
         <li className="md:py-1 relative">
           <NavLink text="History" path="/history" />
         </li>
+        <li className="md:py-1 relative">
+          <NavLink text="Mini Drive" path="/drive" />
+        </li>
         <li className="md:py-1">
           <NavLink text="About" path="/about" />
         </li>

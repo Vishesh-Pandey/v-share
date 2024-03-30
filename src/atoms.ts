@@ -51,6 +51,11 @@ export const themeAtom = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const driveFilesAtom = atom({
+  key: "driveFileAtom",
+  default: [],
+});
+
 interface AuthAtomType {
   currentUser: User | null;
   isAnonymous: boolean;
