@@ -127,7 +127,7 @@ function ShareText() {
           ></div>
           <div
             className={`absolute top-0 left-0 text-gray-400 p-2 ${
-              mainContent.text === "" ? "" : "hidden"
+              mainContent.text == "" ? "" : "hidden"
             }`}
           >
             Start typing anything here and share easily by clicking on
