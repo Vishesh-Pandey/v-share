@@ -46,7 +46,7 @@ function MiniDrive() {
     const storage = getStorage();
     const storageRef = ref(
       storage,
-      `${authContext.currentUser?.uid}/${fileId}`
+      `users/${authContext.currentUser?.uid}/${fileId}`
     );
 
     // 'file' comes from the Blob or File API

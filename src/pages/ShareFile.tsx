@@ -31,25 +31,31 @@ function ShareFile() {
       toast("Choose a file first");
       return;
     }
-    setPublishing(true);
 
-    const fileId = description + v4();
+    try {
+      setPublishing(true);
 
-    const storage = getStorage();
-    const storageRef = ref(storage, fileId);
+      const fileId = description + v4();
 
-    // 'file' comes from the Blob or File API
-    if (file !== null) {
-      await uploadBytes(storageRef, file).then((snapshot) => {
-        console.log(snapshot);
-        console.log("Uploaded a blob or file!");
-      });
+      const storage = getStorage();
+      const storageRef = ref(storage, `public/${fileId}`);
 
-      setPublishedFilesLink([fileId, ...publishedFilesLink]);
+      // 'file' comes from the Blob or File API
+      if (file !== null) {
+        await uploadBytes(storageRef, file).then((snapshot) => {
+          console.log(snapshot);
+          console.log("Uploaded a blob or file!");
+        });
 
-      navigate(`/sharedFile/${fileId}`);
+        setPublishedFilesLink([fileId, ...publishedFilesLink]);
+
+        navigate(`/sharedFile/${fileId}`);
+      }
+      setPublishing(false);
+    } catch (error) {
+      console.log(error);
+      setPublishing(false);
     }
-    setPublishing(false);
   };
 
   return (
