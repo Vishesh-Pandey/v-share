@@ -13,7 +13,9 @@ function DriveFile() {
   useEffect(() => {
     const initializeFile = async () => {
       setLoading(true);
-      getDownloadURL(ref(storage, user === undefined ? "" : user + "/" + id))
+      getDownloadURL(
+        ref(storage, user === undefined ? "" : "users/" + user + "/" + id)
+      )
         .then((url) => {
           setFileUrl(url);
         })

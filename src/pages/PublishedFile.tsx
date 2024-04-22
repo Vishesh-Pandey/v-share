@@ -11,12 +11,10 @@ function PublishedFile() {
   const [fileType, setFileType] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log(id);
-
   useEffect(() => {
     const initializeFile = async () => {
       setLoading(true);
-      getDownloadURL(ref(storage, id))
+      getDownloadURL(ref(storage, `public/${id}`))
         .then((url) => {
           setFileUrl(url);
         })
@@ -27,7 +25,7 @@ function PublishedFile() {
 
       // Fetch file metadata
 
-      const metadata = await getMetadata(ref(storage, id));
+      const metadata = await getMetadata(ref(storage, `public/${id}`));
       let metaDataString = "";
       if (metadata.contentType !== undefined) {
         metaDataString = metadata.contentType.toString();
